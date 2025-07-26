@@ -32,6 +32,7 @@ jobs:
         with:
           name: healthtrack-app-jar
           path: target/healthtrack-app-*.jar
+
   # ==================================
   # 2. FUNCTIONAL TESTS (Selenium)
   # ==================================
