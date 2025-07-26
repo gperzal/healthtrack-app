@@ -27,6 +27,11 @@ jobs:
       - name: 📦 Build project & Run unit tests
         run: mvn clean install test
 
+      - name: 📤 Upload build artifact (JAR)
+        uses: actions/upload-artifact@v4
+        with:
+          name: healthtrack-app-jar
+          path: target/healthtrack-app-*.jar
   # ==================================
   # 2. FUNCTIONAL TESTS (Selenium)
   # ==================================

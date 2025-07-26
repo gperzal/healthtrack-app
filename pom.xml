@@ -64,7 +64,8 @@
                     </includes>
                 </configuration>
             </plugin>
-                <!-- SonarQube Scanner -->
+
+            <!-- SonarQube Scanner -->
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
@@ -76,6 +77,14 @@
                     <sonar.login>${env.SONAR_TOKEN}</sonar.login>
                 </configuration>
             </plugin>
-          </plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+
     </build>
 </project>
