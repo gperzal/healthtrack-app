@@ -33,8 +33,9 @@ public class UserUITest {
         driver.get("https://httpbin.org/get");
         String pageTitle = driver.getTitle();
         assertNotNull(pageTitle, "Page title should not be null");
-        assertFalse(pageTitle.isEmpty(), "Page title should not be empty");
+        assertFalse(pageTitle.isBlank(), "Page title should not be blank");
     }
+
 
     @AfterEach
     public void tearDown() {
