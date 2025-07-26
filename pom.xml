@@ -16,7 +16,6 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.9.3</junit.version>
-
     </properties>
 
     <dependencies>
@@ -70,26 +69,17 @@
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>3.11.0.3922</version>
-                <configuration>
-                    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-                    <sonar.organization>gperzal</sonar.organization>
-                    <sonar.projectKey>gperzal_healthtrack-app</sonar.projectKey>
-                    <sonar.login>${env.SONAR_TOKEN}</sonar.login>
-                    <sonar.sources>src/main/java</sonar.sources>
-                    <sonar.tests>src/test/java</sonar.tests>
-                    <sonar.java.binaries>target/classes</sonar.java.binaries>
-                    <sonar.java.test.binaries>target/test-classes</sonar.java.test.binaries>
-                    <sonar.junit.reportPaths>target/surefire-reports</sonar.junit.reportPaths>
-                </configuration>
             </plugin>
+
+            <!-- Plugin install (con versión) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-install-plugin</artifactId>
+                <version>3.1.1</version>
                 <configuration>
                     <skip>true</skip>
                 </configuration>
             </plugin>
         </plugins>
-
     </build>
 </project>
