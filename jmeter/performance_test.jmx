@@ -21,11 +21,6 @@
         </elementProp>
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">30</intProp>
-        <longProp name="ThreadGroup.start_time">0</longProp>
-        <longProp name="ThreadGroup.end_time">0</longProp>
-        <boolProp name="ThreadGroup.scheduler">false</boolProp>
-        <stringProp name="ThreadGroup.duration"></stringProp>
-        <stringProp name="ThreadGroup.delay"></stringProp>
       </ThreadGroup>
       <hashTree>
         <!-- HTTP Request -->
@@ -45,16 +40,10 @@
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.path">/updateWeight</stringProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree/>
-        <!-- Listener -->
+        <!-- Summary Listener -->
         <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
@@ -69,18 +58,7 @@
               <message>true</message>
               <threadName>true</threadName>
               <dataType>true</dataType>
-              <encoding>false</encoding>
-              <assertions>true</assertions>
-              <subresults>true</subresults>
-              <responseData>false</responseData>
-              <samplerData>false</samplerData>
-              <xml>false</xml>
               <fieldNames>true</fieldNames>
-              <responseHeaders>false</responseHeaders>
-              <requestHeaders>false</requestHeaders>
-              <responseDataOnError>false</responseDataOnError>
-              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-              <assertionsResultsToSave>0</assertionsResultsToSave>
               <bytes>true</bytes>
               <sentBytes>true</sentBytes>
               <url>true</url>
@@ -89,7 +67,8 @@
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename">jmeter/results/result.jtl</stringProp>
+          <!-- Write the JTL into working-dir/results -->
+          <stringProp name="filename">results/result.jtl</stringProp>
         </ResultCollector>
         <hashTree/>
       </hashTree>
