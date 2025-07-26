@@ -51,7 +51,29 @@
     </dependencies>
 
     <build>
+
+
         <plugins>
+
+            <plugin>
+                <groupId>com.lazerycode.jmeter</groupId>
+                <artifactId>jmeter-maven-plugin</artifactId>
+                <version>3.7.0</version>
+                <executions>
+                    <execution>
+                        <id>jmeter-tests</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jmeter</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <resultsFileFormat>xml</resultsFileFormat>
+                    <resultsDirectory>results</resultsDirectory>
+                    <testFilesDirectory>src/test/jmeter</testFilesDirectory>
+                </configuration>
+            </plugin>
             <!-- Plugin para ejecutar pruebas con JUnit 5 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -82,4 +104,22 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>ui-tests</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <includes>
+                                <include>**/*UITest.java</include>
+                            </includes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

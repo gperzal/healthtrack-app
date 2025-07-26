@@ -50,15 +50,17 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: 🌐 Install Chromium & ChromeDriver
+      - name: 🌐 Install Chrome & Chromedriver
         run: |
           sudo apt-get update
-          sudo apt-get install -y chromium-browser chromium-chromedriver
+          sudo apt-get install -y google-chrome-stable chromium-chromedriver
+          which google-chrome
+          which chromedriver
 
       - name: 🧪 Run Selenium UI Tests
         env:
-          CHROME_BIN: /usr/bin/chromium-browser
-        run: mvn test
+          CHROME_BIN: /usr/bin/google-chrome
+        run: mvn test -Pui-tests
 
   # ==================================
   # 3. PERFORMANCE TESTS (JMeter)

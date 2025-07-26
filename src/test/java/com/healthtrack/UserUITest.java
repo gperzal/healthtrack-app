@@ -22,6 +22,9 @@ public class UserUITest {
         options.setBinary(System.getenv("CHROME_BIN"));
         options.addArguments("--headless=new", "--no-sandbox", "--disable-dev-shm-usage");
 
+        // Set explicit path to chromedriver on Linux
+        System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+
         driver = new ChromeDriver(options);
     }
 
