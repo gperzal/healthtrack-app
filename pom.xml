@@ -1,16 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Configuración principal -->
     <groupId>com.healthtrack</groupId>
     <artifactId>healthtrack-app</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>healthtrack-app</name>
     <description>Plataforma de monitoreo de peso - HealthTrack</description>
 
-    <!-- Configuración de compilación -->
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
@@ -19,7 +18,7 @@
     </properties>
 
     <dependencies>
-        <!-- JUnit 5 para pruebas unitarias -->
+        <!-- JUnit 5 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -33,7 +32,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Selenium (opcional para pruebas funcionales UI) -->
+        <!-- Selenium for UI tests -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
@@ -41,7 +40,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- AssertJ para aserciones más legibles -->
+        <!-- AssertJ for fluent assertions -->
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
@@ -49,17 +48,17 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Spark Java for lightweight HTTP server -->
         <dependency>
             <groupId>com.sparkjava</groupId>
             <artifactId>spark-core</artifactId>
             <version>2.9.4</version>
         </dependency>
-
     </dependencies>
 
     <build>
         <plugins>
-            <!-- Plugin de compilación -->
+            <!-- Compiler plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -70,7 +69,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Plugin para crear JAR ejecutable -->
+            <!-- Shade plugin to produce executable fat-jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -92,7 +91,7 @@
                 </executions>
             </plugin>
 
-            <!-- Plugin para ejecutar pruebas con JUnit 5 -->
+            <!-- Surefire plugin for running tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -109,16 +108,6 @@
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>3.11.0.3922</version>
-            </plugin>
-
-            <!-- Plugin install (con versión) -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-install-plugin</artifactId>
-                <version>3.1.1</version>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
             </plugin>
         </plugins>
     </build>

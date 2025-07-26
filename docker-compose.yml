@@ -15,6 +15,7 @@ services:
     depends_on:
       - app
     volumes:
+      # Montamos la carpeta local jmeter/ dentro del contenedor:
       - ./jmeter:/tests
     command: >
       -n -t /tests/performance_test.jmx
