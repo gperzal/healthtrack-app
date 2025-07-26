@@ -1,0 +1,33 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v3
+
+      - name: Configurar JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Compilar proyecto
+        run: mvn clean compile
+
+      - name: Ejecutar pruebas unitarias
+        run: mvn test
+
+      - name: Análisis de calidad con SonarQube
+        run: mvn sonar:sonar -Dsonar.projectKey=HealthTrack -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
+      - name: Pruebas de rendimiento (JMeter)
+        run: jmeter -n -t tests/performance_test.jmx -l tests/reports/jmeter-report.jtl
