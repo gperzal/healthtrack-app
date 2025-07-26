@@ -87,13 +87,13 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: jmeter-html-report
-          path: results/report
+          path: jmeter/results/report
 
       - name: 📤 Upload raw .jtl results
         uses: actions/upload-artifact@v4
         with:
           name: jmeter-raw-results
-          path: results/result.jtl
+          path: jmeter/results/result.jtl
 
   # ==================================
   # 4. CODE QUALITY (SonarCloud)
