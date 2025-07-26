@@ -72,18 +72,19 @@ jobs:
           sudo apt-get install -y jmeter
 
       - name: 🔬 Run JMeter Load Test
+        working-directory: jmeter
         run: |
-          mkdir -p jmeter/results
-          jmeter -n -t jmeter/performance_test.jmx -l jmeter/results/result.jtl -e -o jmeter/results/report
+          mkdir -p results
+          jmeter -n -t performance_test.jmx -l results/result.jtl -e -o results/report
 
       - name: 📤 Upload JMeter HTML Report
         uses: actions/upload-artifact@v4
         with:
           name: jmeter-html-report
-          path: jmeter/results/report
+          path: results/report
 
       - name: 📤 Upload raw .jtl results
         uses: actions/upload-artifact@v4
         with:
           name: jmeter-raw-results
-          path: jmeter/results/result.jtl
+          path: results/result.jtl
