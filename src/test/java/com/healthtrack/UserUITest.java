@@ -18,24 +18,23 @@ public class UserUITest {
     @BeforeEach
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
-        // Use Chromium binary on GitHub Actions
-        options.setBinary(System.getenv("CHROME_BIN"));
-        options.addArguments("--headless=new", "--no-sandbox", "--disable-dev-shm-usage");
 
+        // Read binary from CHROME_BIN (set in CI), fallback to chromium-browser
+        String chromeBinary = System.getenv("CHROME_BIN");
+        if (chromeBinary == null || chromeBinary.isEmpty()) {
+            chromeBinary = "/usr/bin/chromium-browser";
+        }
+        options.setBinary(chromeBinary);
+
+        options.addArguments("--headless=new", "--no-sandbox", "--disable-dev-shm-usage");
         driver = new ChromeDriver(options);
     }
 
-
     @Test
     public void testOpenExamplePage() {
-        // Page load timeout para que no cuelgue CI
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
-
-        // Navegar a example.org, que siempre tiene el título "Example Domain"
         driver.get("https://example.org");
         String pageTitle = driver.getTitle();
-
-        // Validaciones claras
         assertNotNull(pageTitle, "Page title should not be null");
         assertEquals("Example Domain", pageTitle, "Page title should match 'Example Domain'");
     }
