@@ -26,8 +26,11 @@ jobs:
       - name: Ejecutar pruebas unitarias
         run: mvn test
 
-      - name: Análisis de calidad con SonarQube
-        run: mvn sonar:sonar -Dsonar.projectKey=HealthTrack -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-
       - name: Pruebas de rendimiento (JMeter)
         run: jmeter -n -t tests/performance_test.jmx -l tests/reports/jmeter-report.jtl
+
+      - name: Análisis código con SonarCloud
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar 
