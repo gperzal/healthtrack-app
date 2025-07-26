@@ -17,13 +17,14 @@ public class UserUITest {
 
     @BeforeEach
     public void setUp() {
-        // Headless Chrome, usando el binario preinstalado en GitHub Actions
         ChromeOptions options = new ChromeOptions();
-        options.setBinary("/usr/bin/google-chrome");
+        // Use Chromium binary on GitHub Actions
+        options.setBinary(System.getenv("CHROME_BIN"));
         options.addArguments("--headless=new", "--no-sandbox", "--disable-dev-shm-usage");
 
         driver = new ChromeDriver(options);
     }
+
 
     @Test
     public void testOpenExamplePage() {
