@@ -45,11 +45,11 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: 🌐 Install Chrome (headless)
+      - name: 🔧 Install ChromeDriver
         run: |
           sudo apt-get update
-          sudo apt-get install -y chromium-browser chromium-chromedriver
-          export CHROME_BIN=/usr/bin/chromium-browser
+          sudo apt-get install -y chromium-chromedriver
+          which google-chrome || which chromium-browser
 
       - name: 🧪 Run Selenium UI Tests
         run: mvn test

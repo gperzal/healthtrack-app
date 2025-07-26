@@ -17,8 +17,9 @@ public class UserUITest {
 
     @BeforeEach
     public void setUp() {
-        // Set Chrome to headless mode for CI environments
+        // Set Chrome to headless mode and define binary path for CI
         ChromeOptions options = new ChromeOptions();
+        options.setBinary("/usr/bin/google-chrome"); // Chrome pre-installed on GitHub Actions
         options.addArguments("--headless=new");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
@@ -32,6 +33,7 @@ public class UserUITest {
         driver.get("https://httpbin.org/get");
         String pageTitle = driver.getTitle();
         assertNotNull(pageTitle, "Page title should not be null");
+        assertFalse(pageTitle.isEmpty(), "Page title should not be empty");
     }
 
     @AfterEach
