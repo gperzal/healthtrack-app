@@ -75,6 +75,11 @@
                     <sonar.organization>gperzal</sonar.organization>
                     <sonar.projectKey>gperzal_healthtrack-app</sonar.projectKey>
                     <sonar.login>${env.SONAR_TOKEN}</sonar.login>
+                    <sonar.sources>src/main/java</sonar.sources>
+                    <sonar.tests>src/test/java</sonar.tests>
+                    <sonar.java.binaries>target/classes</sonar.java.binaries>
+                    <sonar.java.test.binaries>target/test-classes</sonar.java.test.binaries>
+                    <sonar.junit.reportPaths>target/surefire-reports</sonar.junit.reportPaths>
                 </configuration>
             </plugin>
             <plugin>
