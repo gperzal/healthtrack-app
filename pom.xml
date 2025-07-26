@@ -51,48 +51,17 @@
     </dependencies>
 
     <build>
-
-
         <plugins>
-
-            <plugin>
-                <groupId>com.lazerycode.jmeter</groupId>
-                <artifactId>jmeter-maven-plugin</artifactId>
-                <version>3.7.0</version>
-                <executions>
-                    <execution>
-                        <id>jmeter-tests</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>jmeter</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <resultsFileFormat>xml</resultsFileFormat>
-                    <resultsDirectory>results</resultsDirectory>
-                    <testFilesDirectory>src/test/jmeter</testFilesDirectory>
-                </configuration>
-            </plugin>
             <!-- Plugin para ejecutar pruebas con JUnit 5 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals><goal>shade</goal></goals>
-                        <configuration>
-                            <createDependencyReducedPom>false</createDependencyReducedPom>
-                            <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.healthtrack.App</mainClass>
-                                </transformer>
-                            </transformers>
-                        </configuration>
-                    </execution>
-                </executions>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.1.2</version>
+                <configuration>
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
+                </configuration>
             </plugin>
 
             <!-- SonarQube Scanner -->
@@ -113,6 +82,7 @@
             </plugin>
         </plugins>
     </build>
+
     <profiles>
         <profile>
             <id>ui-tests</id>
