@@ -79,7 +79,6 @@ jobs:
       - name: 🚀 Start HTTP Server in background
         run: |
           java -jar target/*-shaded.jar &
-          echo "Waiting for server to start..."
           sleep 8
 
       - name: 📦 Install JMeter
@@ -91,21 +90,24 @@ jobs:
         working-directory: jmeter
         run: |
           mkdir -p results
-          jmeter -n -t performance_test.jmx \
-            -l results/result.jtl \
-            -o results/report
+          jmeter -n -t performance_test.jmx -l results/result.jtl
 
-      - name: 📤 Upload JMeter HTML Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: jmeter-html-report
-          path: jmeter/results/report
+      - name: 📊 Generate HTML Dashboard
+        working-directory: jmeter
+        run: |
+          jmeter -g results/result.jtl -o results/report
 
       - name: 📤 Upload raw .jtl results
         uses: actions/upload-artifact@v4
         with:
           name: jmeter-raw-results
           path: jmeter/results/result.jtl
+
+      - name: 📤 Upload JMeter HTML Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: jmeter-html-report
+          path: jmeter/results/report
 
     # ==================================
   # 4. CODE QUALITY (SonarCloud)
