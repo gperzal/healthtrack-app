@@ -17,25 +17,27 @@ public class UserUITest {
 
     @BeforeEach
     public void setUp() {
-        // Set Chrome to headless mode and define binary path for CI
+        // Headless Chrome, usando el binario preinstalado en GitHub Actions
         ChromeOptions options = new ChromeOptions();
-        options.setBinary("/usr/bin/google-chrome"); // Chrome pre-installed on GitHub Actions
-        options.addArguments("--headless=new");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
+        options.setBinary("/usr/bin/google-chrome");
+        options.addArguments("--headless=new", "--no-sandbox", "--disable-dev-shm-usage");
 
         driver = new ChromeDriver(options);
     }
 
     @Test
     public void testOpenExamplePage() {
+        // Page load timeout para que no cuelgue CI
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
-        driver.get("https://httpbin.org/get");
-        String pageTitle = driver.getTitle();
-        assertNotNull(pageTitle, "Page title should not be null");
-        assertFalse(pageTitle.isBlank(), "Page title should not be blank");
-    }
 
+        // Navegar a example.org, que siempre tiene el título "Example Domain"
+        driver.get("https://example.org");
+        String pageTitle = driver.getTitle();
+
+        // Validaciones claras
+        assertNotNull(pageTitle, "Page title should not be null");
+        assertEquals("Example Domain", pageTitle, "Page title should match 'Example Domain'");
+    }
 
     @AfterEach
     public void tearDown() {
