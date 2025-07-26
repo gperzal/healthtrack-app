@@ -93,7 +93,7 @@ jobs:
           mkdir -p results
           jmeter -n -t performance_test.jmx \
             -l results/result.jtl \
-            -e -o results/report
+            -o results/report
 
       - name: 📤 Upload JMeter HTML Report
         uses: actions/upload-artifact@v4
