@@ -70,7 +70,8 @@ jobs:
     needs: build_and_unit_tests
 
     steps:
-      - uses: actions/checkout@v4
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
 
       - name: 📦 Build & Package App
         run: mvn clean package -DskipTests
@@ -80,6 +81,11 @@ jobs:
           java -jar target/*-shaded.jar &
           echo "Waiting for server to start..."
           sleep 8
+
+      - name: 📦 Install JMeter
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jmeter
 
       - name: 🔬 Run JMeter Load Test
         working-directory: jmeter
@@ -101,7 +107,7 @@ jobs:
           name: jmeter-raw-results
           path: jmeter/results/result.jtl
 
-  # ==================================
+    # ==================================
   # 4. CODE QUALITY (SonarCloud)
   # ==================================
   code_quality_sonarcloud:
