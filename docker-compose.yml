@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    container_name: healthtrack-app
+    ports:
+      - "8080:8080"
+    networks:
+      - perf-net
+
+  jmeter:
+    image: justb4/jmeter:5.5
+    container_name: jmeter
+    depends_on:
+      - app
+    volumes:
+      - ./jmeter:/tests
+    command: >
+      -n -t /tests/performance_test.jmx
+      -l /tests/resultados.jtl
+      -e -o /tests/report
+    networks:
+      - perf-net
+
+networks:
+  perf-net:
+    driver: bridge

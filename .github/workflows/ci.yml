@@ -75,20 +75,20 @@ jobs:
         run: mvn clean package -DskipTests
 
       - name: 🚀 Run JMeter via Docker Compose
-        working-directory: app-dummy
+        working-directory: jmeter
         run: docker compose up --build --abort-on-container-exit
 
       - name: 📤 Upload JMeter HTML Report
         uses: actions/upload-artifact@v4
         with:
           name: jmeter-html-report
-          path: app-dummy/jmeter/report
+          path: jmeter/report
 
       - name: 📤 Upload raw .jtl results
         uses: actions/upload-artifact@v4
         with:
           name: jmeter-raw-results
-          path: app-dummy/jmeter/resultados.jtl
+          path: jmeter/resultados.jtl
 
   # ==================================
   # 4. CODE QUALITY (SonarCloud)
