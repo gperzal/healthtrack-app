@@ -81,10 +81,12 @@ jobs:
           java -jar target/*-shaded.jar &
           sleep 8
 
-      - name: 📦 Install JMeter
+      - name: 🛠️ Download & Setup JMeter 5.6.3
         run: |
-          sudo apt-get update
-          sudo apt-get install -y jmeter
+          JMETER_VERSION=5.6.3
+          curl -sL https://downloads.apache.org/jmeter/binaries/apache-jmeter-${JMETER_VERSION}.tgz \
+            | tar -xz -C $RUNNER_TEMP
+          echo "$RUNNER_TEMP/apache-jmeter-${JMETER_VERSION}/bin" >> $GITHUB_PATH
 
       - name: 🔬 Run JMeter Load Test
         working-directory: jmeter
@@ -109,7 +111,7 @@ jobs:
           name: jmeter-html-report
           path: jmeter/results/report
 
-    # ==================================
+  # ==================================
   # 4. CODE QUALITY (SonarCloud)
   # ==================================
   code_quality_sonarcloud:
